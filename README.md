@@ -42,7 +42,7 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column          | Type       | Option                         |
+| Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | name            | string     | null: false                    |
 | description     | text       | null: false                    |
@@ -61,7 +61,7 @@ Things you may want to cover:
 
 ## buys　テーブル
 
-| Column        | Type         | Option                         |
+| Column        | Type         | Options                        |
 | ------------- | ------------ | ------------------------------ |
 | user          | references   | null: false, foreign_key: true |
 | item          | references   | null: false, foreign_key: true |
@@ -77,7 +77,7 @@ Things you may want to cover:
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | post_num        | string     | null: false                    |
-| prefecture_id   | integer    | null: false,                   | 
+| prefecture_id   | integer    | null: false                    | 
 | municipality    | string     | null: false                    |
 | address         | string     | null: false                    |
 | building        | string     |                                |
