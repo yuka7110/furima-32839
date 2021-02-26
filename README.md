@@ -23,7 +23,7 @@ Things you may want to cover:
 
 * ...
 
-##　user テーブル
+##　users テーブル
 
 | Column             | Type     | Options                  |
 | ------------------ | -------- | ------------------------ |
@@ -38,37 +38,51 @@ Things you may want to cover:
 
 ## Association
 - has_many :items
-- has_many :prefectures
+- has_many :buys
 
-
-## prefecture テーブル
-
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| post_num        | string     | null: false                    |
-| prefecture      | string     | null: false                    | 
-| municipality    | string     | null: false                    |
-| address         | string     | null: false                    |
-| phone_num       | string     | null: false                    |
-| user            | references | null: false, foreign_key: true |
-
-## Association
--belongs_to :user
-
-
-## item テーブル
+## items テーブル
 
 | Column          | Type       | Option                         |
 | --------------- | ---------- | ------------------------------ |
 | name            | string     | null: false                    |
 | description     | text       | null: false                    |
-| category_id     | integer    | null: false, foreign_key: true |
-| condition_id    | integer    | null: false, foreign_key: true |
-| fee_id          | integer    | null: false, foreign_key: true |
-| prefecture_id   | integer    | null: false, foreign_key: true |
-| days_id         | integer    | null: false, foreign_key: true |
+| category_id     | integer    | null: false,                   |
+| condition_id    | integer    | null: false,                   |
+| fee_id          | integer    | null: false,                   |
+| prefecture_id   | integer    | null: false,                   |
+| days_id         | integer    | null: false,                   |
 | price           | integer    | null: false                    |
-| user            | references | null: false, foreign_key: true |
+| card            | references | null: false, foreign_key: true |
 
 ## Association
--belongs_to :user
+- belongs_to :user
+- belongs_to :buy
+
+
+## buys　テーブル
+
+| Column        | Type         | Option                         |
+| ------------- | ------------ | ------------------------------ |
+| user          | references   | null: false, foreign_key: true |
+| item          | references   | null: false, foreign_key: true |
+| buy_id        | integer      | null: false                    |
+
+## Association
+- belongs_to :buys
+- belongs_to :item
+- belongs_to :prefecture
+
+
+## prefectures テーブル
+
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| post_num        | string     | null: false                    |
+| prefecture_id   | integer    | null: false,                   | 
+| municipality    | string     | null: false                    |
+| address         | string     | null: false                    |
+| phone_num       | string     | null: false                    |
+| buy             | references | null: false, foreign_key: true |
+
+## Association
+- belongs_to :buy
