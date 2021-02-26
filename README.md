@@ -34,11 +34,11 @@ Things you may want to cover:
 | last_name          | string   | null: false              |
 | first_name_kana    | string   | null: false              |
 | last_name_kana     | string   | null: false              |
-| birthday           | integer  | null: false              |
+| birthday           | date     | null: false              |
 
 ## Association
 - has_many :items
-- belongs_to :buyer
+- has_many :prefectures
 
 
 ## prefecture テーブル
@@ -50,7 +50,7 @@ Things you may want to cover:
 | municipality    | string     | null: false                    |
 | address         | string     | null: false                    |
 | phone_num       | string     | null: false                    |
-| user_id         | references | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
 
 ## Association
 -belongs_to :user
@@ -62,13 +62,13 @@ Things you may want to cover:
 | --------------- | ---------- | ------------------------------ |
 | name            | string     | null: false                    |
 | description     | text       | null: false                    |
-| category_id     | references | null: false, foreign_key: true |
-| condition_id    | references | null: false, foreign_key: true |
-| fee_id          | references | null: false, foreign_key: true |
-| prefecture_id   | references | null: false, foreign_key: true |
-| days_id         | references | null: false, foreign_key: true |
+| category_id     | integer    | null: false, foreign_key: true |
+| condition_id    | integer    | null: false, foreign_key: true |
+| fee_id          | integer    | null: false, foreign_key: true |
+| prefecture_id   | integer    | null: false, foreign_key: true |
+| days_id         | integer    | null: false, foreign_key: true |
 | price           | integer    | null: false                    |
-| user_id         | references | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
 
 ## Association
 -belongs_to :user
