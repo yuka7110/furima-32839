@@ -68,7 +68,7 @@ Things you may want to cover:
 
 ## Association
 - belongs_to :user
-- has_many   :items
+- belongs_to :item
 - has_one    :prefecture
 
 
