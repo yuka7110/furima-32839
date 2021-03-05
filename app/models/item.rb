@@ -15,8 +15,10 @@ class Item < ApplicationRecord
   validates :prefecture_id, numericality: { other_than: 1 }
   validates :day_id,        numericality: { other_than: 1 }
 
-  with_options presence: true, format: { with: /\A[0-9]+\z/, greater_than: 300, less_than: 10000000, message: '¥300~¥9,999,999の間で半角数字を使用してください'} do
-    validates :price,       presence: true
+  with_options presence: true,
+               format: { with: /\A[0-9]+\z/, greater_than: 300, less_than: 10_000_000,
+                         message: '¥300~¥9,999,999の間で半角数字を使用してください' } do
+    validates :price, presence: true
   end
 
   belongs_to :user
