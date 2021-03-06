@@ -18,12 +18,11 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :description
-    validates :price
+    validates :price, numericality: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
   end
 
-  validates :price, numericality: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }
   validates_inclusion_of :price, in: 300..9_999_999, message: '¥300~¥9,999,999の間で入力してください'
-  
+
   belongs_to :user
   has_one_attached :image
 end
