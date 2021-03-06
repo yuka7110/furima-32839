@@ -2,9 +2,9 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: :new
   before_action :move_to_login, except: [:index]
 
-  def index
-    @items = Item.includes(:user)
-  end
+# def index
+#    @items = Item.includes(:user)
+#  end
 
   def new
     @item = Item.new
