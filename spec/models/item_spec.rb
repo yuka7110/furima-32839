@@ -38,6 +38,12 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include('Category is not a number')
         end
 
+        it 'category_idが1を選択している場合登録できないこと' do
+          @item.category_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include('')
+        end
+
         it 'condition_idが空では登録できないこと' do
           @item.condition_id = nil
           @item.valid?

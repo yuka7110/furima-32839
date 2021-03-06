@@ -6,15 +6,15 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :day
 
-  withoptions numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1 } do
     validates :category_id
     validates :condition_id
-    validates :fee_id,
+    validates :fee_id
     validates :prefecture_id
     validates :day_id
   end
 
-  withoptions presence: true do
+  with_options presence: true do
     validates :image
     validates :name
     validates :description
@@ -23,7 +23,7 @@ class Item < ApplicationRecord
   with_options presence: true,
                format: { with: /\A[0-9]+\z/, greater_than: 300, less_than: 10_000_000,
                          message: '¥300~¥9,999,999の間で半角数字を使用してください' } do
-    validates :price, presence: true
+    validates :price
   end
 
   belongs_to :user
