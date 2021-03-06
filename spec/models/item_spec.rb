@@ -41,7 +41,7 @@ RSpec.describe Item, type: :model do
         it 'category_idが1を選択している場合登録できないこと' do
           @item.category_id = 1
           @item.valid?
-          expect(@item.errors.full_messages).to include('')
+          expect(@item.errors.full_messages).to include('Category must be other than 1')
         end
 
         it 'condition_idが空では登録できないこと' do
@@ -50,10 +50,22 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include('Condition is not a number')
         end
 
+        it 'condition_idが1を選択している場合登録できないこと' do
+          @item.condition_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include('Condition must be other than 1')
+        end
+
         it 'fee_idが空では登録できないこと' do
           @item.fee_id = nil
           @item.valid?
           expect(@item.errors.full_messages).to include('Fee is not a number')
+        end
+
+        it 'fee_idが1を選択している場合登録できないこと' do
+          @item.fee_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include('Fee must be other than 1')
         end
 
         it 'prefecture_idが空では登録できないこと' do
@@ -62,16 +74,51 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include('Prefecture is not a number')
         end
 
+        it 'category_idが1を選択している場合登録できないこと' do
+          @item.prefecture_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
+        end
+
         it 'day_idが空では登録できないこと' do
           @item.day_id = nil
           @item.valid?
           expect(@item.errors.full_messages).to include('Day is not a number')
         end
 
+        it 'day_idが1を選択している場合登録できないこと' do
+          @item.day_id = 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include('Day must be other than 1')
+        end
+
         it 'priceが空では登録できないこと' do
           @item.price = nil
           @item.valid?
           expect(@item.errors.full_messages).to include("Price can't be blank")
+        end
+
+        it 'priceが半角英数混合では登録できないこと' do
+
+        end
+
+        it 'priceが半角英語だけでは登録できないこと' do
+
+        end
+
+        it 'priceが全角英語では登録できないこと' do
+          
+        end
+
+        it 'priceが299円以下では登録できないこと' do
+          
+        end
+
+        it 'priceが10000000円以上では登録できないこと' do
+          @item.price = 10000000
+          @item.valid?
+          binding.pry
+          expect(@item.errors.full_messages).to include("")
         end
 
         it 'userが紐づいてないと登録できないこと' do
