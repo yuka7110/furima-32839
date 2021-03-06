@@ -99,26 +99,33 @@ RSpec.describe Item, type: :model do
         end
 
         it 'priceが半角英数混合では登録できないこと' do
-
+          @item.price = "11aa"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price 半角数字を使用してください")
         end
 
         it 'priceが半角英語だけでは登録できないこと' do
-
+          @item.price = "aaaa"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price 半角数字を使用してください")
         end
 
         it 'priceが全角英語では登録できないこと' do
-          
+          @item.price = "ａａａａ"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price 半角数字を使用してください")
         end
 
         it 'priceが299円以下では登録できないこと' do
-          
+          @item.price = "299"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price ¥300~¥9,999,999の間で入力してください")
         end
 
         it 'priceが10000000円以上では登録できないこと' do
-          @item.price = 10000000
+          @item.price = "10000000"
           @item.valid?
-          binding.pry
-          expect(@item.errors.full_messages).to include("")
+          expect(@item.errors.full_messages).to include("Price ¥300~¥9,999,999の間で入力してください")
         end
 
         it 'userが紐づいてないと登録できないこと' do
