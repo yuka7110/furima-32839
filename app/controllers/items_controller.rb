@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: :new
-  before_action :move_to_login, except: [:index]
 
 # def index
 #    @items = Item.includes(:user)
@@ -26,7 +25,4 @@ class ItemsController < ApplicationController
                                  :image).merge(user_id: current_user.id)
   end
 
-  def move_to_login
-    redirect_to new_user_session_path unless user_signed_in?
-  end
 end
