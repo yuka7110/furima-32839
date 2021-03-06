@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
       @user = FactoryBot.build(:user)
     end
 
-    describe "ユーザー新規登録" do
+    describe 'ユーザー新規登録' do
       context '新規登録できるとき' do
         it 'nickname, email, password, password_confirmation, last_name, first_name, last_name_kana, first_name_kana, birthdayが存在すれば登録できること' do
           expect(@user).to be_valid
@@ -59,7 +59,7 @@ RSpec.describe User, type: :model do
 
         it 'password:半角英数混合(半角英語のみ)' do
           @user.password = 'aaaaaa'
-          @user.password_confirmation = "aaaaaa"
+          @user.password_confirmation = 'aaaaaa'
           @user.valid?
           expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
         end
@@ -95,17 +95,17 @@ RSpec.describe User, type: :model do
         end
 
         it 'password：数字のみは登録できない' do
-          @user.password = "111111"
-          @user.password_confirmation = "111111"
+          @user.password = '111111'
+          @user.password_confirmation = '111111'
           @user.valid?
-          expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+          expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
         end
 
         it 'password：全角英数混合は登録できない' do
-          @user.password = "ａａａ１１１"
-          @user.password_confirmation = "ａａａ１１１"
+          @user.password = 'ａａａ１１１'
+          @user.password_confirmation = 'ａａａ１１１'
           @user.valid?
-          expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+          expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
         end
 
         it 'email：emailが被っていた場合は登録できない（一意性）' do
@@ -113,34 +113,32 @@ RSpec.describe User, type: :model do
           another_user = FactoryBot.build(:user)
           another_user.email = @user.email
           another_user.valid?
-          expect(another_user.errors.full_messages).to include("Email has already been taken")
+          expect(another_user.errors.full_messages).to include('Email has already been taken')
         end
 
         it 'last_name：全角（漢字・ひらがな・カタカナ）以外は登録できない' do
-          @user.last_name = "ｱｱｱ"
+          @user.last_name = 'ｱｱｱ'
           @user.valid?
-          expect(@user.errors.full_messages).to include("Last name 全角文字を使用してください")
+          expect(@user.errors.full_messages).to include('Last name 全角文字を使用してください')
         end
 
         it 'first_name：全角（漢字・ひらがな・カタカナ）以外は登録できない' do
-          @user.first_name = "ｱｱｱ"
+          @user.first_name = 'ｱｱｱ'
           @user.valid?
-          expect(@user.errors.full_messages).to include("First name 全角文字を使用してください")
+          expect(@user.errors.full_messages).to include('First name 全角文字を使用してください')
         end
 
         it '姓（フリガナ）：全角（カタカナ）以外は登録できない' do
-          @user.last_name_kana = "ｱｱｱ"
+          @user.last_name_kana = 'ｱｱｱ'
           @user.valid?
-          expect(@user.errors.full_messages).to include("Last name kana 全角カナ文字を使用してください")
+          expect(@user.errors.full_messages).to include('Last name kana 全角カナ文字を使用してください')
         end
 
         it '名（フリガナ）：全角（カタカナ）以外は登録できない' do
-          @user.first_name_kana = "ｱｱｱ"
+          @user.first_name_kana = 'ｱｱｱ'
           @user.valid?
-          expect(@user.errors.full_messages).to include("First name kana 全角カナ文字を使用してください")
+          expect(@user.errors.full_messages).to include('First name kana 全角カナ文字を使用してください')
         end
-
-
       end
     end
   end
