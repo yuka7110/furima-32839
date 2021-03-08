@@ -129,14 +129,14 @@
       <% if @items != [] %>
         <% @items.each do |item| %>
           <li class='list'>
-            <%= link_to image_tag(item.image) do %>
+            <%= link_to item_path(item.id), method: :get do %>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
-                <%# if @item == false %>
+                <% if @item == [] %>
                   <div class='sold-out'>
                     <span>Sold Out!!</span>
                   </div>
-                <%# end %>
+                <% end %>
               </div>
               <div class='item-info'>
                 <h3 class='item-name'>
