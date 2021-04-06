@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe AddressOrder, type: :model do
   describe '購入情報の保存' do
     before do
-      @address_order = FactoryBot.build(:address_order)
+      @user = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item)
+      @address_order = FactoryBot.build(:address_order, user_id: @user.id, item_id: @item.id)
+      sleep(1)
     end
 
     describe '購入ができる場合' do
@@ -75,7 +78,6 @@ RSpec.describe AddressOrder, type: :model do
         it 'item_idが空では登録できないこと' do
           @address_order.item_id = nil
           @address_order.valid?
-          binding.pry
           expect(@address_order.errors.full_messages).to include("Item can't be blank")
         end
       end
