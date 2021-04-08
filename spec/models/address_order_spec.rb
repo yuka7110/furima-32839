@@ -6,7 +6,7 @@ RSpec.describe AddressOrder, type: :model do
       @user = FactoryBot.create(:user)
       @item = FactoryBot.create(:item)
       @address_order = FactoryBot.build(:address_order, user_id: @user.id, item_id: @item.id)
-      sleep(1)
+      sleep(0.5)
     end
 
     describe '購入ができる場合' do
@@ -61,6 +61,18 @@ RSpec.describe AddressOrder, type: :model do
           @address_order.phone_num = '123456789012'
           @address_order.valid?
           expect(@address_order.errors.full_messages).to include('Phone num is too long (maximum is 11 characters)')
+        end
+
+        it 'phone_numが半角数字のみでないと登録できないこと' do
+          @address_order.phone_num = '1234567890０'
+          @address_order.valid?
+          expect(@address_order.errors.full_messages).to include('Phone num 半角数字のみ使用してください')
+        end
+
+        it 'phon_numが全角数字だと登録できないこと' do
+          @address_order.phone_num = '０００００００００００'
+          @address_order.valid?
+          expect(@address_order.errors.full_messages).to include('Phone num 半角数字のみ使用してください')
         end
 
         it 'tokenが空だと保存できない' do
